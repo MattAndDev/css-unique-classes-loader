@@ -1,0 +1,37 @@
+{
+  "name": "css-unique-classes-loader",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "lint": "standard"
+  },
+  "keywords": [
+    "webpack",
+    "loader",
+    "unique class",
+    "css modules"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MattAndDev/sass-unique-classes-rollup-plugin"
+  },
+  "author": {
+    "name": "Matteo Maronati",
+    "email": "me@mattinthe.net",
+    "url": "https://github.com/MattAndDev"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "standard": "^12.0.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint",
+      "pre-push": "npm run lint"
+    }
+  },
+  "dependencies": {
+    "css-tree": "^1.0.0-alpha.29"
+  }
+}
