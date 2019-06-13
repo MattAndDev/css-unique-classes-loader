@@ -1,10 +1,8 @@
-# sass-unique-classes-rollup-plugin
+# css-unique-classes-loader
 
-This plugin is entirely focused on doing exactly three things:
+This loader does one only thing
 
-- compiles `.s(c|a)ss)` imports
-- create unique class names
-- run autoprefixer & minifier
+- create unique class names from css
 
 it will always export an object with two properties:
 
