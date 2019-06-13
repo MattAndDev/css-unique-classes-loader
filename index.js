@@ -1,13 +1,29 @@
 const csstree = require('css-tree')
 const crypto = require('crypto')
+const { getOptions } = require('loader-utils')
+const validateOptions = require('schema-utils')
+const { name } = require('./package.json')
+
+const schema = {
+  type: 'object',
+  properties: {
+    generateUniqueName: {
+      instanceof: 'Function'
+    }
+  }
+}
+
+const defaultIdGenerator = (classname) => {
+  return crypto.randomBytes(7).toString('hex')
+}
 
 const cache = {}
-const createUniqueClassNames = async (css) => {
+const createUniqueClassNames = async function (css, uniqueFunction) {
   const ast = csstree.parse(css)
   const map = {}
   csstree.walk(ast, function (node) {
-    const id = 'flix-' + crypto.randomBytes(3).toString('hex')
     if (node.type === 'ClassSelector') {
+      const id = uniqueFunction(node.name)
       const name = node.name
       if (cache[name]) {
         node.name = cache[name]
@@ -25,6 +41,9 @@ const createUniqueClassNames = async (css) => {
 }
 
 module.exports = async function (source) {
-  const { raw, map } = await createUniqueClassNames(source)
+  const options = getOptions(this)
+  validateOptions(schema, options, name)
+  const uniqueFn = options.generateUniqueName || defaultIdGenerator
+  const { raw, map } = await createUniqueClassNames(source, uniqueFn)
   return 'export default {\nraw: ' + JSON.stringify(raw) + ',\nmap:' + JSON.stringify(map) + '}'
 }
