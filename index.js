@@ -26,5 +26,5 @@ const createUniqueClassNames = async (css) => {
 
 module.exports = async function (source) {
   const { raw, map } = await createUniqueClassNames(source)
-  return 'export default {\nraw: `' + raw + '`,\nmap:' + JSON.stringify(map) + '}'
+  return 'export default {\nraw: ' + JSON.stringify(raw) + ',\nmap:' + JSON.stringify(map) + '}'
 }
