@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "css-tree": "^1.0.0-alpha.29",
-    "loader-utils": "^1.2.3",
+    "loader-utils": "^3.2.1",
     "schema-utils": "^2.2.0"
   }
 }
